@@ -1,8 +1,8 @@
 # vtt-resplite
 ## usage
-re-splite vtt file
-Example:
-old format
+> re-splite vtt file
+
+old format:
 ```
 1
 00:00:02.130 --> 00:00:05.620
@@ -14,7 +14,8 @@ specialization on
 machine learning engineering
 production, MLOps.
 ```
-new format
+
+new format:
 ```
 1
 00:00:02.130 --> 00:00:08.960
