@@ -1,28 +1,33 @@
-class VttSplit:
-    def __init__(self):
-        self.result_str = ""
-        self.source_list = []
 
-    def run(self, source_str=None, source_path=None):
+
+class VttSplit:
+    def run(source_str=None, source_path=None) -> str:
+        vs = VttSplit()
+        return vs._deal(source_str, source_path)
+
+    def __init__(self):
+        self._result_str = ""
+        self._source_list = []
+
+    def _deal(self, source_str=None, source_path=None):
         if source_str != None:
-            self.uploadStr(source_str)
+            self._uploadStr(source_str)
         elif source_path != None:
-            self.uploadFile(source_path)
+            self._uploadFile(source_path)
         else:
             raise Exception("请传入文件或文本")
-        if len(self.source_list) < 5:
+        if len(self._source_list) < 5:
             raise Exception("缺少文件内容。")
-        self.masterFun()
-        return self.result_str
-        
+        self._masterFun()
+        return self._result_str
 
-    def masterFun(self):
-        result_list = self.source_list[0:2]
+    def _masterFun(self):
+        result_list = self._source_list[0:2]
         start_time = None
         end_time = None
         title_index = 1
         sub_str = []
-        for i, v in enumerate(self.source_list):
+        for i, v in enumerate(self._source_list):
             if i < 3:   # 跳过开头
                 continue
             if v.find("-->") != -1:
@@ -44,21 +49,20 @@ class VttSplit:
                 sub_str = []
             elif len(v) > 0:  # 解决语句粘连问题
                 sub_str[-1] = sub_str[-1] + " "
-        self.result_str = ""
+        self._result_str = ""
         for v in result_list:
-            self.result_str += "" + \
+            self._result_str += "" + \
                 (v if isinstance(v, str) else str(v)) + "\n"
 
-    def uploadStr(self, content: str):
-        self.source_list = content.split("\n")
+    def _uploadStr(self, content: str):
+        self._source_list = content.split("\n")
 
-    def uploadFile(self, path: str):
+    def _uploadFile(self, path: str):
         with open(path, mode="r") as f:
             content = f.read()
-            self.source_list = content.split("\n")
+            self._source_list = content.split("\n")
 
-    
+
 if __name__ == "__main__":
-    vs = VttSplit()
-    rs = vs.run(source_path="/Users/wizard/Downloads/subtitles-en (3).vtt")
-    print(rs)
+    vt = VttSplit.run(source_path="/Users/wizard/Downloads/subtitles-en (3).vtt")
+    print(vt)
