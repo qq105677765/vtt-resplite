@@ -1,15 +1,11 @@
 
 
 class VttSplit:
-    def run(source_str=None, source_path=None) -> str:
-        vs = VttSplit()
-        return vs._deal(source_str, source_path)
-
     def __init__(self):
         self._result_str = ""
         self._source_list = []
 
-    def _deal(self, source_str=None, source_path=None):
+    def run(self, source_str=None, source_path=None) -> str:
         if source_str != None:
             self._uploadStr(source_str)
         elif source_path != None:
@@ -64,5 +60,7 @@ class VttSplit:
 
 
 if __name__ == "__main__":
-    vt = VttSplit.run(source_path="/Users/wizard/Downloads/subtitles-en (3).vtt")
-    print(vt)
+    path = "/Users/wizard/Downloads/subtitles-en (1).vtt"
+    vs = VttSplit()
+    result = vs.run(source_path=path)
+    print(result)
