@@ -61,8 +61,8 @@ class VttSplit:
                 sub_str = []
                 self._result_json["content"].append(line_json)
             elif len(v) > 0:  # 解决语句粘连问题
-                sub_str[-1] = sub_str[-1] if isinstance(
-                    sub_str[-1], str) else str(sub_str[-1]) + " "
+                sub_str[-1] = (sub_str[-1] if isinstance(
+                    sub_str[-1], str) else str(sub_str[-1])) + " "
 
     def _uploadStr(self, content: str):
         self._source_list = content.split("\n")
@@ -77,4 +77,5 @@ if __name__ == "__main__":
     path = "/Users/wizard/Downloads/subtitles-en (1).vtt"
     vs = VttSplit(source_path=path)
     result = vs.json_result()
+    result = vs.str_result()
     print(result)
