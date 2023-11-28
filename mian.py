@@ -72,11 +72,11 @@ class VttSplit:
                     sub_str[-1], str) else str(sub_str[-1])) + " "
 
     def _uploadStr(self, content: str):
-        if content.startswith("WEBVTT"):
+        self._source_list = content.split("\n")
+        if str(self._source_list[0]).strip() == "WEBVTT":
             self._isVtt = True
         else:
             self._isVtt = False
-        self._source_list = content.split("\n")
 
     def _uploadFile(self, path: str):
         if path.split(".")[-1] == "vtt":
