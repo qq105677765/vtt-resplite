@@ -6,6 +6,7 @@ import os
 class VttSplit:
     def __init__(self, source_str=None, source_path=None):
         self._source_list = []
+        self._isVtt = False
         # content = [{num:int, frame:str, caption:str}]
         self._result_json = {"title": "", "content": []}
         self._run(source_str, source_path)
@@ -14,7 +15,9 @@ class VttSplit:
         return self._result_json
 
     def str_result(self):
-        result_str = self._result_json["title"] + os.linesep * 2
+        result_str = ""
+        if self._isVtt:
+            result_str = self._result_json["title"] + os.linesep * 2
         for j in self._result_json["content"]:
             result_str += str(j["num"]) + os.linesep
             result_str += j["frame"] + os.linesep
@@ -34,14 +37,18 @@ class VttSplit:
         self._masterFun()
 
     def _masterFun(self):
-        self._result_json["title"] = "".join(self._source_list[0:2])
+        if self._isVtt:
+            self._result_json["title"] = "".join(self._source_list[0:2])
+        else:
+            self._result_json["title"] = ""
         start_time = None
         end_time = None
         title_index = 1
         sub_str = []
         for i, v in enumerate(self._source_list):
-            if i < 3:   # 跳过开头
-                continue
+            if self._isVtt:
+                if i < 3:   # 跳过开头
+                    continue
             if v.find("-->") != -1:
                 if len(sub_str) > 0:    # 去除旧序号
                     sub_str = sub_str[:-2]
@@ -65,17 +72,25 @@ class VttSplit:
                     sub_str[-1], str) else str(sub_str[-1])) + " "
 
     def _uploadStr(self, content: str):
+        if content.startswith("WEBVTT"):
+            self._isVtt = True
+        else:
+            self._isVtt = False
         self._source_list = content.split("\n")
 
     def _uploadFile(self, path: str):
+        if path.split(".")[-1] == "vtt":
+            self._isVtt = True
+        else:
+            self._isVtt = False
         with open(path, mode="r") as f:
             content = f.read()
             self._source_list = content.split("\n")
 
 
 if __name__ == "__main__":
-    path = "/Users/wizard/Downloads/subtitles-en (1).vtt"
+    path = "/Users/wizard/Downloads/001 What you're going to get from this course--[koudaizy.com]_en.srt"
     vs = VttSplit(source_path=path)
     result = vs.json_result()
-    result = vs.str_result()
+    # result = vs.str_result()
     print(result)
