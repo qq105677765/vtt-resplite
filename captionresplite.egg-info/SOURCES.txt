@@ -1,0 +1,10 @@
+README.md
+setup.py
+captionresplite/__init__.py
+captionresplite/splite_common.py
+captionresplite/srt.py
+captionresplite/vtt.py
+captionresplite.egg-info/PKG-INFO
+captionresplite.egg-info/SOURCES.txt
+captionresplite.egg-info/dependency_links.txt
+captionresplite.egg-info/top_level.txt

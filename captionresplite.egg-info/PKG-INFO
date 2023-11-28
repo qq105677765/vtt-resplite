@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: captionresplite
+Version: 0.2
+Summary: re-splict vtt,srt by ". ! ?"
+Home-page: https://github.com/qq105677765/vtt-resplite
+Author: wenda zheng
+Author-email: 105677765@qq.com
+License: MIT
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+
+re-splict vtt,srt by ". ! ?"
