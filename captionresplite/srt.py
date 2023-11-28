@@ -1,7 +1,7 @@
 import re
 from datetime import datetime
 
-from SpliteABC import SpliteABC
+from captionresplite.splite_common import SpliteABC
 
 
 class SrtSplit(SpliteABC):
@@ -70,6 +70,7 @@ class SrtSplit(SpliteABC):
                 self._result_json["content"].append(temp_result_json)
             else:
                 substr_list.append(temp_v + " ")
+
 
 if __name__ == "__main__":
     ss = SrtSplit(

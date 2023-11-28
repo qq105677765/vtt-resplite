@@ -1,10 +1,11 @@
 
-from SpliteABC import SpliteABC
+
+from captionresplite.splite_common import SpliteABC
 
 
 class VttSplit(SpliteABC):
     def __init__(self, source_str=None, source_path=None):
-        super().__init__(source_str,source_path)
+        super().__init__(source_str, source_path)
         # content = [{num:int, frame:str, caption:str}]
 
     def _masterFun(self):
@@ -24,7 +25,7 @@ class VttSplit(SpliteABC):
                 end_time = v.split("-->")[1]
                 continue
             sub_str.append(v)
-            if v.endswith((".","?","!")):  # 收集组合好的内容并添加到结果list
+            if v.endswith((".", "?", "!")):  # 收集组合好的内容并添加到结果list
                 line_json = {}
                 line_json["num"] = title_index
                 title_index += 1

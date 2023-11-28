@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='vtt-resplite',
+    name='captionresplite',
     version='0.2',
     packages=find_packages(),
     install_requires=[
