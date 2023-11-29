@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import os
+import re
 
 
 class SpliteABC(ABC):
@@ -25,13 +26,14 @@ class SpliteABC(ABC):
 
     def _uploadStr(self, content: str):
         self._source_list = content.split(os.linesep)
-
+        self._source_list = [re.sub(r"[\r\n]+", '', c)
+                             for c in self._source_list]
 
     def _uploadFile(self, path: str):
         with open(path, mode="r") as f:
             content = f.read()
-            self._source_list = content.split(os.linesep)
-            
+            self._uploadFile(content)
+
     def json_result(self):
         return self._result_json
 

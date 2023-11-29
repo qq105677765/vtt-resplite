@@ -57,7 +57,7 @@ class SrtSplit(SpliteABC):
                 temp_result_json["caption"] = " ".join(
                     substr_list) + temp_v[:pos+1]
                 substr_list = []
-                temp_v = v[pos+1:]
+                temp_v = v[pos+2:]
                 self._result_json["content"].append(temp_result_json)
             if end_flag:
                 temp_result_json["num"] = index
